@@ -1,15 +1,14 @@
 package aplicacao;
 
-import classesAuxiliares.Posicao;
+import CamadaXadrex.PartidaXadrez;
 
 public class Programa {
 
 	public static void main(String[] args) {
 
+		PartidaXadrez p = new PartidaXadrez();
+		UI.imprimirTabuleiro(p.pecas());
 		
-		Posicao po = new Posicao(4, 8); 
-		System.out.println(po);
-
 	}
 
 }
