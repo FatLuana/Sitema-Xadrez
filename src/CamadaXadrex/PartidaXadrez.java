@@ -31,6 +31,10 @@ public class PartidaXadrez{
 	public void configuracaoInicial() {
 		novaPeca('b', 5, new Rei(tabuleiro, Cor.BRANCO));
 		novaPeca('c', 2, new Torre(tabuleiro, Cor.PRETO));
+		novaPeca('c', 3, new Rei(tabuleiro, Cor.BRANCO));
+		novaPeca('d', 1, new Torre(tabuleiro, Cor.BRANCO));
+		novaPeca('e', 7, new Rei(tabuleiro, Cor.PRETO));
+		
 		
 	}
 	
