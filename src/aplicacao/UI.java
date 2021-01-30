@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import CamadaXadrex.Cor;
+import CamadaXadrex.PartidaXadrez;
 import CamadaXadrex.PecaXadrez;
 import CamadaXadrex.PosicaoXadrez;
 
@@ -48,27 +49,38 @@ public class UI {
 			throw new InputMismatchException("Erro lendo a posição do xadrez: Valores válidos de a1 até h8");
 		}
 	}
-
+	
 	public static void imprimirTabuleiro(PecaXadrez[][] peca) {
 		for(int i = 0; i < peca.length; i++) {
 			System.out.print((8 - i) + " ");
 			for(int j = 0; j < peca.length; j++) {
-				 imprimirPeca(peca[i][j]);
+				 imprimirPeca(peca[i][j], false);
 			}
 			System.out.println();
 		}
 		
-		System.out.println("  a b c d e f g h");
-	
-		
-		
+		System.out.println("  a b c d e f g h");	
 	}
 	
+	public static void imprimirTabuleiro(PecaXadrez[][] peca, boolean[][] movimentosPossiveis) {
+		for(int i = 0; i < peca.length; i++) {
+			System.out.print((8 - i) + " ");
+			for(int j = 0; j < peca.length; j++) {
+				 imprimirPeca(peca[i][j], movimentosPossiveis[i][j]);
+			}
+			System.out.println();
+		}
+	}
+
 	
 	/* Imprime uma Peça no Tabuleiro */
-	private static void imprimirPeca(PecaXadrez peca) {
+	private static void imprimirPeca(PecaXadrez peca, boolean fundo) {
+		if(fundo) {
+			System.out.print(ANSI_GREEN_BACKGROUND);
+		}
+		
 		if(peca == null) {
-		System.out.print("-");	
+		System.out.print("-" + ANSI_RESET);	
 		}
 		else {
             if (peca.getCor() == Cor.BRANCO) {
