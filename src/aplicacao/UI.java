@@ -29,6 +29,13 @@ public class UI {
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 	
 	
+	// https://stackoverflow.com/questions/2979383/java-clear-the-console
+	/* Lipando a tela */ 
+	public static void clearScreen() {
+	 System.out.print("\033[H\033[2J");
+	 System.out.flush();
+	} 
+	
 	public static PosicaoXadrez lerPosicaoXadrez(Scanner sc) {
 		
 		try {
@@ -73,6 +80,5 @@ public class UI {
         }
         System.out.print(" ");
 	}
-	
 	
 }
