@@ -12,7 +12,6 @@ public class PartidaXadrez{
 	public PartidaXadrez() {
 		tabuleiro = new Tabuleiro(8,8);
 		configuracaoInicial();
-		
 	}
 
 	public PecaXadrez[][] pecas() {
@@ -26,9 +25,11 @@ public class PartidaXadrez{
 	}
 	
 	public void configuracaoInicial() {
-		tabuleiro.colocarPeca(new Rei(tabuleiro, Cor.PRETO), new Posicao(5,3));
-		tabuleiro.colocarPeca(new Rei(tabuleiro, Cor.BRANCO), new Posicao(1,2));
-		tabuleiro.colocarPeca(new Torre(tabuleiro, Cor.PRETO), new Posicao(6,4));
+		tabuleiro.colocarPeca(new Rei(tabuleiro, Cor.PRETO), new Posicao(5,5));
+		tabuleiro.colocarPeca(new Torre(tabuleiro, Cor.BRANCO), new Posicao(4,2));
+		tabuleiro.colocarPeca(new Torre(tabuleiro, Cor.PRETO), new Posicao(2,6));
+		tabuleiro.colocarPeca(new Rei(tabuleiro, Cor.BRANCO), new Posicao(1,3));
+		
 	}
 	
 
