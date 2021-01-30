@@ -61,6 +61,13 @@ public class UI {
 		System.out.println("  a b c d e f g h");	
 	}
 	
+	public static void imprimirPartidaXadrez(PartidaXadrez partida) {
+		imprimirTabuleiro(partida.pecas());
+		System.out.println();
+		System.out.println("Turn: " + partida.getTurn());
+		System.out.println("Esperando jogar: " + partida.getJogadorAtual());
+	}
+	
 	public static void imprimirTabuleiro(PecaXadrez[][] peca, boolean[][] movimentosPossiveis) {
 		for(int i = 0; i < peca.length; i++) {
 			System.out.print((8 - i) + " ");
