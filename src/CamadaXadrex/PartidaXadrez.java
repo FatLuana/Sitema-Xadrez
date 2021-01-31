@@ -1,5 +1,8 @@
 package CamadaXadrex;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pecas.xadrez.Rei;
 import pecas.xadrez.Torre;
 import tabuleiroGame.Peca;
@@ -12,6 +15,8 @@ public class PartidaXadrez{
 	private Cor jogadorAtual;
 	private Tabuleiro tabuleiro; 
 	
+	List<Peca> pecaNoTabuleiro = new ArrayList<>();
+	List<Peca> capturarPeca = new ArrayList<>();
 	
 	public int getTurn() {
 		return turn;
@@ -58,14 +63,22 @@ public class PartidaXadrez{
 		validarPosicaoOrigem(origem);
 		ValidarPosicaoDestino(origem, destino);
 		Peca capturarPeca = fazerMover(origem, destino);
+				
 		mudarTurno();
 		return (PecaXadrez)capturarPeca;
 	}
 		
 	private Peca fazerMover(Posicao origem, Posicao destino) {
 		Peca p = tabuleiro.revoverPeca(origem);
-		Peca capturada = tabuleiro.revoverPeca(destino);
+		Peca capturada = tabuleiro.revoverPeca(destino);	
 		tabuleiro.colocarPeca(p, destino);
+		
+		if(capturada != null) {
+			pecaNoTabuleiro.remove(capturada);
+			this.capturarPeca.add(capturada);
+			
+		}
+		
 		return capturada;
 	}
 	
@@ -92,6 +105,7 @@ public class PartidaXadrez{
 		
 	public void novaPeca(char coluna, int linha, PecaXadrez p) {
 		tabuleiro.colocarPeca(p, new PosicaoXadrez(coluna, linha).toPosicao());
+		pecaNoTabuleiro.add(p);
 	}
 	
 	private void mudarTurno() {
