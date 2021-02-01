@@ -142,7 +142,7 @@ public class PartidaXadrez {
 	
 	private Peca fazerMover(Posicao origem, Posicao destino) {
 		PecaXadrez p = (PecaXadrez)board.removerPeca(origem);
-	//	p.increaseMoveCount();
+		p.increaseMoveCount();
 		Peca capturarPeca = board.removerPeca(destino);
 		board.colocarPeca(p, destino);
 		
@@ -190,7 +190,7 @@ public class PartidaXadrez {
 	
 	private void desfazerMovimento(Posicao origem, Posicao destino, Peca capturarPeca) {
 		PecaXadrez p = (PecaXadrez)board.removerPeca(destino);
-	//	p.decreaseMoveCount();
+		p.decreaseMoveCount();
 		board.colocarPeca(p, origem);
 		
 		if (capturarPeca != null) {
