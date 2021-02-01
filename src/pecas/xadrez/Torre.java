@@ -7,71 +7,62 @@ import tabuleiroGame.Tabuleiro;
 
 public class Torre extends PecaXadrez{
 
-	public Torre(Tabuleiro tabuleiro, Cor cor) {
-		super(tabuleiro, cor);
+
+	public Torre(Tabuleiro board, Cor color) {
+		super(board, color);
 	}
-	
+
 	@Override
 	public String toString() {
 		return "T";
 	}
-
+	
 	@Override
-	public boolean[][] movimentosPossiveis() {
-		boolean [][] matriz = new boolean[getTabuleiro().getLinha()][getTabuleiro().getColuna()];
+	public boolean[][] possivelMovimentos() {
+		boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
 		
 		Posicao p = new Posicao(0, 0);
 		
-		// torre movendo para cima 
-		
-		p.setarValores(posicao.getLinha() - 1, posicao.getColuna());
-		while(getTabuleiro().posicaoExistente(p) && !getTabuleiro().haUmaPeca(p)) {
-			matriz[p.getLinha()][p.getColuna()] = true; 
-			p.setLinha(p.getLinha() - 1);
+		// above
+		p.setValues(position.getRow() - 1, position.getColumn());
+		while (getBoard().positionExists(p) && !getBoard().haUmaPeca(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
+			p.setRow(p.getRow() - 1);
+		}
+		if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		
-		if(getTabuleiro().posicaoExistente(p) && ExistePecaOponente(p)) {
-			matriz[p.getLinha()][p.getColuna()] = true; 
+		// left
+		p.setValues(position.getRow(), position.getColumn() - 1);
+		while (getBoard().positionExists(p) && !getBoard().haUmaPeca(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
+			p.setColumn(p.getColumn() - 1);
+		}
+		if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		
-		// torre movendo para esquerda 
-		
-		p.setarValores(posicao.getLinha(), posicao.getColuna() - 1);
-		while(getTabuleiro().posicaoExistente(p) && !getTabuleiro().haUmaPeca(p)) {
-			matriz[p.getLinha()][p.getColuna()] = true; 
-			p.setColuna(p.getColuna() - 1);
+		// right
+		p.setValues(position.getRow(), position.getColumn() + 1);
+		while (getBoard().positionExists(p) && !getBoard().haUmaPeca(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
+			p.setColumn(p.getColumn() + 1);
+		}
+		if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		
-		if(getTabuleiro().posicaoExistente(p) && ExistePecaOponente(p)) {
-			matriz[p.getLinha()][p.getColuna()] = true; 
+		// below
+		p.setValues(position.getRow() + 1, position.getColumn());
+		while (getBoard().positionExists(p) && !getBoard().haUmaPeca(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
+			p.setRow(p.getRow() + 1);
+		}
+		if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		
-		// torree para direita direita 
-		
-		p.setarValores(posicao.getLinha(), posicao.getColuna() + 1);
-		while(getTabuleiro().posicaoExistente(p) && !getTabuleiro().haUmaPeca(p)) {
-			matriz[p.getLinha()][p.getColuna()] = true; 
-			p.setColuna(p.getColuna() + 1);
-		}
-		
-		if(getTabuleiro().posicaoExistente(p) && ExistePecaOponente(p)) {
-			matriz[p.getLinha()][p.getColuna()] = true; 
-		}
-		
-		// torre movendo para baixo 
-		
-		p.setarValores(posicao.getLinha() + 1, posicao.getColuna());
-		while(getTabuleiro().posicaoExistente(p) && !getTabuleiro().haUmaPeca(p)) {
-			matriz[p.getLinha()][p.getColuna()] = true; 
-			p.setLinha(p.getLinha() + 1);
-		}
-		
-		if(getTabuleiro().posicaoExistente(p) && ExistePecaOponente(p)) {
-			matriz[p.getLinha()][p.getColuna()] = true; 
-		}
-	
-		return matriz;	
-		
+		return mat;
 	}
-	
 }

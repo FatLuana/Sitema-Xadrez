@@ -1,31 +1,30 @@
 package tabuleiroGame;
 
 public abstract class Peca {
+
+	protected Posicao position;
+	private Tabuleiro board;
 	
-	protected Posicao posicao;
-	private Tabuleiro tabuleiro;
-	
-	public Peca(Tabuleiro tabuleiro) {
-		this.tabuleiro = tabuleiro;
+	public Peca(Tabuleiro board) {
+		this.board = board;
+		position = null;
 	}
 
-	protected Tabuleiro getTabuleiro() {
-		return tabuleiro;
+	protected Tabuleiro getBoard() {
+		return board;
 	}
 	
-	public abstract boolean[][] movimentosPossiveis();
-
-	public boolean movimentoPossivel(Posicao posicao){
-		return movimentosPossiveis()[posicao.getLinha()][posicao.getColuna()];
-		
+	public abstract boolean[][] possivelMovimentos();
+	
+	public boolean possibleMove(Posicao position) {
+		return possivelMovimentos()[position.getRow()][position.getColumn()];
 	}
-
-	public boolean existeAlgumMovimentoPossivel() {
-		boolean[][] matriz = movimentosPossiveis();
-		
-		for(int i = 0; i < matriz.length; i++) {
-			for(int j = 0; j < matriz.length; j++) {
-				if(matriz[i][j]) {
+	
+	public boolean isThereAnyPossibleMove() {
+		boolean[][] mat = possivelMovimentos();
+		for (int i=0; i<mat.length; i++) {
+			for (int j=0; j<mat.length; j++) {
+				if (mat[i][j]) {
 					return true;
 				}
 			}

@@ -4,23 +4,38 @@ import tabuleiroGame.Peca;
 import tabuleiroGame.Posicao;
 import tabuleiroGame.Tabuleiro;
 
-public abstract class PecaXadrez extends Peca{
+public abstract class PecaXadrez extends Peca {
 
-	private Cor cor; 
-	
-	public PecaXadrez(Tabuleiro tabuleiro, Cor cor) {
-		super(tabuleiro);
-		this.cor = cor;
+	private Cor color;
+	private int moveCount;
+
+	public PecaXadrez(Tabuleiro board, Cor color) {
+		super(board);
+		this.color = color;
 	}
 
-	public Cor getCor() {
-		return cor;
+	public Cor getColor() {
+		return color;
 	}
 	
-	protected boolean ExistePecaOponente(Posicao posicao) {
-		PecaXadrez p = (PecaXadrez)getTabuleiro().peca(posicao);
-		return p != null && p.getCor() != cor;
+	public int getMoveCount() {
+		return moveCount;
 	}
 	
+	public void increaseMoveCount() {
+		moveCount++;
+	}
 
+	public void decreaseMoveCount() {
+		moveCount--;
+	}
+
+	public PosicaoXadrez getChessPosition() {
+		return PosicaoXadrez.fromPosition(position);
+	}
+	
+	protected boolean isThereOpponentPiece(Posicao position) {
+		PecaXadrez p = (PecaXadrez)getBoard().peca(position);
+		return p != null && p.getColor() != color;
+	}
 }

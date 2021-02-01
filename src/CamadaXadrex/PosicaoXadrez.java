@@ -1,38 +1,38 @@
 package CamadaXadrex;
+
 import tabuleiroGame.Posicao;
 
 public class PosicaoXadrez {
-	private char coluna; 
-	private int linha; 
 	
-	public PosicaoXadrez(char coluna, int linha) {
-		if(coluna < 'a' || coluna > 'h' || linha < 1 || linha > 8) {
-			throw new XadrezExcecao("Valores validos de a1 até h8");
+	private char column;
+	private int row;
+	
+	public PosicaoXadrez(char column, int row) {
+		if (column < 'a' || column > 'h' || row < 1 || row > 8) {
+			throw new XadrezExcecao("Error instantiating ChessPosition. Valid values are from a1 to h8.");
 		}
-		
-		this.coluna = coluna;
-		this.linha = linha;
-	}
-	
-	public char getColuna() {
-		return coluna;
-	}
-	
-	public int getLinha() {
-		return linha;
+		this.column = column;
+		this.row = row;
 	}
 
-	protected Posicao toPosicao() {
-		return new Posicao(8 - linha, coluna - 'a'); 
+	public char getColumn() {
+		return column;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	protected Posicao toPosition() {
+		return new Posicao(8 - row, column - 'a');
 	}
 	
-	protected static PosicaoXadrez fromPosicao(Posicao posicao) {
-	return new PosicaoXadrez((char)('a' - posicao.getColuna()), 8 - posicao.getLinha());
+	protected static PosicaoXadrez fromPosition(Posicao position) {
+		return new PosicaoXadrez((char)('a' + position.getColumn()), 8 - position.getRow());
 	}
 	
 	@Override
 	public String toString() {
-		return "" + coluna + linha; 
+		return "" + column + row;
 	}
-	
 }

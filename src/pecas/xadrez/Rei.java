@@ -1,90 +1,114 @@
 package pecas.xadrez;
 
 import CamadaXadrex.Cor;
+import CamadaXadrex.PartidaXadrez;
 import CamadaXadrex.PecaXadrez;
 import tabuleiroGame.Posicao;
 import tabuleiroGame.Tabuleiro;
 
 public class Rei extends PecaXadrez{
 
-	public Rei(Tabuleiro tabuleiro, Cor cor) {
-		super(tabuleiro, cor);
-	}
+
+	private PartidaXadrez chessMatch;
 	
+	public Rei(Tabuleiro board, Cor color/*, PartidaXadrez chessMatch*/) {
+		super(board, color);
+		//this.chessMatch = chessMatch;
+	}
+
 	@Override
 	public String toString() {
 		return "R";
 	}
-	
-	private boolean podeMover(Posicao posicao) {
-		PecaXadrez p = (PecaXadrez)getTabuleiro().peca(posicao);
-		return p == null || p.getCor() != getCor(); 
-	}
 
+	private boolean podeMover(Posicao position) {
+		PecaXadrez p = (PecaXadrez)getBoard().peca(position);
+		return p == null || p.getColor() != getColor();
+	}
+	
+	/*private boolean testRookCastling(Posicao position) {
+		PecaXadrez p = (PecaXadrez)getBoard().piece(position);
+		return p != null && p instanceof Rook && p.getColor() == getColor() && p.getMoveCount() == 0;
+	}*/
+	
 	@Override
-	public boolean[][] movimentosPossiveis() {
-		boolean [][] matriz = new boolean[getTabuleiro().getLinha()][getTabuleiro().getColuna()];
-	
-		Posicao p = new Posicao(0,0); 
-	
-		// movendo o rei para cima 
-		p.setarValores(posicao.getLinha() - 1, posicao.getColuna());
-		if(getTabuleiro().posicaoExistente(p) && podeMover(p)) {
-			matriz[p.getLinha()][p.getColuna()] = true; 
+	public boolean[][] possivelMovimentos() {
+		boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
+		
+		Posicao p = new Posicao(0, 0);
+		
+		// above
+		p.setValues(position.getRow() - 1, position.getColumn());
+		if (getBoard().positionExists(p) && podeMover(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
 		}
-		// movendo o rei para baixo
-		p.setarValores(posicao.getLinha() + 1, posicao.getColuna());
-		if(getTabuleiro().posicaoExistente(p) && podeMover(p)) {
-		matriz[p.getLinha()][p.getColuna()] = true; 
+
+		// below
+		p.setValues(position.getRow() + 1, position.getColumn());
+		if (getBoard().positionExists(p) && podeMover(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
+		}
+
+		// left
+		p.setValues(position.getRow(), position.getColumn() - 1);
+		if (getBoard().positionExists(p) && podeMover(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
+		}
+
+		// right
+		p.setValues(position.getRow(), position.getColumn() + 1);
+		if (getBoard().positionExists(p) && podeMover(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
+		}
+
+		// nw
+		p.setValues(position.getRow() - 1, position.getColumn() - 1);
+		if (getBoard().positionExists(p) && podeMover(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
+		}
+
+		// ne
+		p.setValues(position.getRow() - 1, position.getColumn() + 1);
+		if (getBoard().positionExists(p) && podeMover(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
+		}
+
+		// sw
+		p.setValues(position.getRow() + 1, position.getColumn() - 1);
+		if (getBoard().positionExists(p) && podeMover(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
 		}
 		
-		// movendo o rei para esquerda  
-		p.setarValores(posicao.getLinha(), posicao.getColuna() - 1);
-		if(getTabuleiro().posicaoExistente(p) && podeMover(p)) {
-		matriz[p.getLinha()][p.getColuna()] = true; 
+		// se
+		p.setValues(position.getRow() + 1, position.getColumn() + 1);
+		if (getBoard().positionExists(p) && podeMover(p)) {
+			mat[p.getRow()][p.getColumn()] = true;
 		}
-		// movendo o rei para direita
-		p.setarValores(posicao.getLinha(), posicao.getColuna() + 1);
-		if(getTabuleiro().posicaoExistente(p) && podeMover(p)) {
-		matriz[p.getLinha()][p.getColuna()] = true; 
-		}
+
+	/*	// #specialmove castling
+		if (getMoveCount() == 0 && !chessMatch.getCheck()) {
+			// #specialmove castling kingside rook
+			Position posT1 = new Position(position.getRow(), position.getColumn() + 3);
+			if (testRookCastling(posT1)) {
+				Position p1 = new Position(position.getRow(), position.getColumn() + 1);
+				Position p2 = new Position(position.getRow(), position.getColumn() + 2);
+				if (getBoard().piece(p1) == null && getBoard().piece(p2) == null) {
+					mat[position.getRow()][position.getColumn() + 2] = true;
+				}
+			}
+			// #specialmove castling queenside rook
+			Position posT2 = new Position(position.getRow(), position.getColumn() - 4);
+			if (testRookCastling(posT2)) {
+				Position p1 = new Position(position.getRow(), position.getColumn() - 1);
+				Position p2 = new Position(position.getRow(), position.getColumn() - 2);
+				Position p3 = new Position(position.getRow(), position.getColumn() - 3);
+				if (getBoard().piece(p1) == null && getBoard().piece(p2) == null && getBoard().piece(p3) == null) {
+					mat[position.getRow()][position.getColumn() - 2] = true;
+				}
+			}
+		} */ 
 		
-		// movendo o rei para diagonal esquerda a cima
-		p.setarValores(posicao.getLinha() - 1, posicao.getColuna() - 1);
-		if(getTabuleiro().posicaoExistente(p) && podeMover(p)) {
-		matriz[p.getLinha()][p.getColuna()] = true; 
-		}
-		
-		// movendo o rei para diagonal direita a cima
-		p.setarValores(posicao.getLinha() - 1, posicao.getColuna() + 1);
-		if(getTabuleiro().posicaoExistente(p) && podeMover(p)) {
-		matriz[p.getLinha()][p.getColuna()] = true; 
-		}
-		
-		// movendo o rei para diagonal esquerda a baixo
-		p.setarValores(posicao.getLinha() + 1, posicao.getColuna() - 1);
-		if(getTabuleiro().posicaoExistente(p) && podeMover(p)) {
-		matriz[p.getLinha()][p.getColuna()] = true; 
-		}
-			
-		// movendo o rei para diagonal direita a baixo
-		p.setarValores(posicao.getLinha() + 1, posicao.getColuna() + 1);
-		if(getTabuleiro().posicaoExistente(p) && podeMover(p)) {
-		matriz[p.getLinha()][p.getColuna()] = true; 
-		}
-			
-				
-		
-					
-		
-		
-		
-				
-		
-		
-		
-		
-		return matriz;
+		return mat;
 	}
 	
 }

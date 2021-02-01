@@ -1,41 +1,38 @@
-package tabuleiroGame;
+package tabuleiroGame;;
 
 public class Posicao {
+
+	private int row;
+	private int column;
 	
-	private int linha;
-	private int coluna;
+	public Posicao(int row, int column) {
+		this.row = row;
+		this.column = column;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public int getColumn() {
+		return column;
+	}
+
+	public void setColumn(int column) {
+		this.column = column;
+	}
 	
-	public Posicao(int linha, int coluna) {
-		this.linha = linha;
-		this.coluna = coluna;
+	public void setValues(int row, int column) {
+		this.row = row;
+		this.column = column;
 	}
-
-	public int getLinha() {
-		return linha;
-	}
-
-	public void setLinha(int linha) {
-		this.linha = linha;
-	}
-
-	public int getColuna() {
-		return coluna;
-	}
-
-	public void setColuna(int coluna) {
-		this.coluna = coluna;
-	} 
 	
-	public void setarValores(int linha, int coluna) {
-		this.linha = linha; 
-		this.coluna = coluna; 
-	} 
-
 	@Override
 	public String toString() {
-		return linha + ", " + coluna;
+		return row + ", " + column;
 	}
-	
-	
-
 }
