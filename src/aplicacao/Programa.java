@@ -16,12 +16,12 @@ public class Programa{
 		
 		Scanner sc = new Scanner(System.in);
 		PartidaXadrez chessMatch = new PartidaXadrez();
-		List<PecaXadrez> captured = new ArrayList<>();
+		List<PecaXadrez> capturada = new ArrayList<>();
 		
 		while (!chessMatch.getCheckMate()) {
 			try {
 				UI.clearScreen();
-				UI.printMatch(chessMatch, captured);
+				UI.printMatch(chessMatch, capturada);
 				System.out.println();
 				System.out.print("Source: ");
 				PosicaoXadrez source = UI.readChessPosition(sc);
@@ -36,7 +36,7 @@ public class Programa{
 				PecaXadrez capturedPiece = chessMatch.executarMovimentoXadrez(source, target);
 				
 				if (capturedPiece != null) {
-					captured.add(capturedPiece);
+					capturada.add(capturedPiece);
 				}
 				
 	/*			if (chessMatch.getPromoted() != null) {
@@ -58,7 +58,7 @@ public class Programa{
 				sc.nextLine();
 			}
 		}
-	/*	UI.clearScreen();
-		UI.printMatch(chessMatch, captured); */
+		UI.clearScreen();
+		UI.printMatch(chessMatch, capturada); 
 	}
 }

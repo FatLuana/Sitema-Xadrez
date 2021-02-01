@@ -96,12 +96,12 @@ public class PartidaXadrez {
 		
 		check = (testCheck(oponente(jogadorAtual))) ? true : false;
 
-		/*if (testCheckMate(opponent(currentPlayer))) {
+		if (testCheckMate(oponente(jogadorAtual))) {
 			checkMate = true;
 		}
-		else {*/ 
+		else {
 			nextTurn();
-	//	}
+		}
 		
 		// #specialmove en passant
 	/*	if (movedPiece instanceof Pawn && (target.getRow() == source.getRow() - 2 || target.getRow() == source.getRow() + 2)) {
@@ -282,21 +282,21 @@ public class PartidaXadrez {
 		return false;
 	}
 	
-	/*private boolean testCheckMate(Color color) {
+	private boolean testCheckMate(Cor color) {
 		if (!testCheck(color)) {
 			return false;
 		}
-		List<Peca> list = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == color).collect(Collectors.toList());
-		for (Piece p : list) {
-			boolean[][] mat = p.possibleMoves();
+		List<Peca> list = pecaNoTabuleiro.stream().filter(x -> ((PecaXadrez)x).getColor() == color).collect(Collectors.toList());
+		for (Peca p : list) {
+			boolean[][] mat = p.possivelMovimentos();
 			for (int i=0; i<board.getRows(); i++) {
 				for (int j=0; j<board.getColumns(); j++) {
 					if (mat[i][j]) {
-						Position source = ((ChessPiece)p).getChessPosition().toPosition();
-						Position target = new Position(i, j);
-						Piece capturedPiece = makeMove(source, target);
+						Posicao origem = ((PecaXadrez)p).getChessPosition().toPosition();
+						Posicao destino = new Posicao(i, j);
+						Peca capturedPiece = fazerMover(origem, destino);
 						boolean testCheck = testCheck(color);
-						undoMove(source, target, capturedPiece);
+						desfazerMovimento(origem, destino, capturedPiece);
 						if (!testCheck) {
 							return false;
 						}
@@ -305,7 +305,7 @@ public class PartidaXadrez {
 			}
 		}
 		return true;
-	}	*/
+	}	
 	
 	private void colocarNovaPeca(char coluna, int linha, PecaXadrez peca) {
 		board.colocarPeca(peca, new PosicaoXadrez(coluna, linha).toPosition());
@@ -314,15 +314,15 @@ public class PartidaXadrez {
 	
 	private void initialSetup() {
     
-		colocarNovaPeca('d', 1, new Rei(board, Cor.PRETO));
-		colocarNovaPeca('d', 2, new Torre(board, Cor.PRETO));
-		colocarNovaPeca('c', 2, new Torre(board, Cor.PRETO));
-		colocarNovaPeca('e', 2, new Torre(board, Cor.PRETO));
+		colocarNovaPeca('a', 8, new Rei(board, Cor.PRETO));
+		colocarNovaPeca('b', 8, new Torre(board, Cor.PRETO));
+	//	colocarNovaPeca('h', 7, new Torre(board, Cor.PRETO));
+	//	colocarNovaPeca('e', 2, new Torre(board, Cor.PRETO));
         
-		colocarNovaPeca('d', 8, new Rei(board, Cor.BRANCO));
-		colocarNovaPeca('d', 7, new Torre(board, Cor.BRANCO));
-		colocarNovaPeca('c', 7, new Torre(board, Cor.BRANCO));
-		colocarNovaPeca('e', 7, new Torre(board, Cor.BRANCO));
+		colocarNovaPeca('e', 1, new Rei(board, Cor.BRANCO));
+		colocarNovaPeca('h', 7, new Torre(board, Cor.BRANCO));
+		colocarNovaPeca('d', 1, new Torre(board, Cor.BRANCO));
+	//	colocarNovaPeca('e', 7, new Torre(board, Cor.BRANCO));
         
 	}
 }
