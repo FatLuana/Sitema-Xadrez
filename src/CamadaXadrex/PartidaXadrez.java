@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import pecas.xadrez.Bispo;
+import pecas.xadrez.Cavalo;
 import pecas.xadrez.Peao;
 import pecas.xadrez.Rei;
 import pecas.xadrez.Torre;
@@ -311,9 +312,11 @@ public class PartidaXadrez {
 	private void initialSetup() {
     
 		colocarNovaPeca('a', 1, new Torre(board, Cor.BRANCO));
+		colocarNovaPeca('b', 1, new Cavalo(board, Cor.BRANCO));
 		colocarNovaPeca('c', 1, new Bispo(board, Cor.BRANCO));
 		colocarNovaPeca('e', 1, new Rei(board, Cor.BRANCO));
 		colocarNovaPeca('f', 1, new Bispo(board, Cor.BRANCO));
+		colocarNovaPeca('g', 1, new Cavalo(board, Cor.BRANCO));
 		colocarNovaPeca('h', 1, new Torre(board, Cor.BRANCO));
 		colocarNovaPeca('a', 2, new Peao(board, Cor.BRANCO));
 		colocarNovaPeca('b', 2, new Peao(board, Cor.BRANCO));
@@ -325,9 +328,11 @@ public class PartidaXadrez {
 	    colocarNovaPeca('h', 2, new Peao(board, Cor.BRANCO));
 
 	    colocarNovaPeca('a', 8, new Torre(board, Cor.PRETO));
+	    colocarNovaPeca('b', 8, new Cavalo(board, Cor.PRETO));
 		colocarNovaPeca('c', 8, new Bispo(board, Cor.PRETO));
 		colocarNovaPeca('e', 8, new Rei(board, Cor.PRETO));
 		colocarNovaPeca('f', 8, new Bispo(board, Cor.PRETO));
+	    colocarNovaPeca('g', 8, new Cavalo(board, Cor.PRETO));
 		colocarNovaPeca('h', 8, new Torre(board, Cor.PRETO));
 		colocarNovaPeca('a', 7, new Peao(board, Cor.PRETO));
 		colocarNovaPeca('b', 7, new Peao(board, Cor.PRETO));
