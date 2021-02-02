@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import pecas.xadrez.Peao;
 import pecas.xadrez.Rei;
 import pecas.xadrez.Torre;
 import tabuleiroGame.Peca;
@@ -235,13 +236,7 @@ public class PartidaXadrez {
 	
 	private void validarPosicaoOrigem(Posicao position) {
 		if (!board.haUmaPeca(position)) {
-			throw new XadrezExcecao("Nao ha peça na posicao da fonte");
-		}
-		if (jogadorAtual != ((PecaXadrez)board.peca(position)).getColor()) {
-			throw new XadrezExcecao("A peca escolhida nao e sua");
-		}
-		if (!board.peca(position).isThereAnyPossibleMove()) {
-			throw new XadrezExcecao("Nao ha movimentos possiveis para a peca escolhida");
+			throw new XadrezExcecao("There is no piece on source position");
 		}
 	}
 	
@@ -314,15 +309,29 @@ public class PartidaXadrez {
 	
 	private void initialSetup() {
     
-		colocarNovaPeca('a', 8, new Rei(board, Cor.PRETO));
-		colocarNovaPeca('b', 8, new Torre(board, Cor.PRETO));
-	//	colocarNovaPeca('h', 7, new Torre(board, Cor.PRETO));
-	//	colocarNovaPeca('e', 2, new Torre(board, Cor.PRETO));
-        
+		colocarNovaPeca('a', 1, new Torre(board, Cor.BRANCO));
 		colocarNovaPeca('e', 1, new Rei(board, Cor.BRANCO));
-		colocarNovaPeca('h', 7, new Torre(board, Cor.BRANCO));
-		colocarNovaPeca('d', 1, new Torre(board, Cor.BRANCO));
-	//	colocarNovaPeca('e', 7, new Torre(board, Cor.BRANCO));
+		colocarNovaPeca('h', 1, new Torre(board, Cor.BRANCO));
+		colocarNovaPeca('a', 2, new Peao(board, Cor.BRANCO));
+		colocarNovaPeca('b', 2, new Peao(board, Cor.BRANCO));
+		colocarNovaPeca('c', 2, new Peao(board, Cor.BRANCO));
+		colocarNovaPeca('d', 2, new Peao(board, Cor.BRANCO));
+	    colocarNovaPeca('e', 2, new Peao(board, Cor.BRANCO));
+	    colocarNovaPeca('f', 2, new Peao(board, Cor.BRANCO));
+	    colocarNovaPeca('g', 2, new Peao(board, Cor.BRANCO));
+	    colocarNovaPeca('h', 2, new Peao(board, Cor.BRANCO));
+
+	    colocarNovaPeca('a', 8, new Torre(board, Cor.PRETO));
+		colocarNovaPeca('e', 8, new Rei(board, Cor.PRETO));
+		colocarNovaPeca('h', 8, new Torre(board, Cor.PRETO));
+		colocarNovaPeca('a', 7, new Peao(board, Cor.PRETO));
+		colocarNovaPeca('b', 7, new Peao(board, Cor.PRETO));
+		colocarNovaPeca('c', 7, new Peao(board, Cor.PRETO));
+		colocarNovaPeca('d', 7, new Peao(board, Cor.PRETO));
+	    colocarNovaPeca('e', 7, new Peao(board, Cor.PRETO));
+	    colocarNovaPeca('f', 7, new Peao(board, Cor.PRETO));
+	    colocarNovaPeca('g', 7, new Peao(board, Cor.PRETO));
+	    colocarNovaPeca('h', 7, new Peao(board, Cor.PRETO));
+		}
         
-	}
 }
